@@ -31,3 +31,15 @@
 ![Header](https://img.shields.io/badge/Git-090909?style=for-the-badge&logo=git&logoColor=E44F30)
 ![Header](https://img.shields.io/badge/PyCharm-090909?style=for-the-badge&logo=pycharm&logoColor=92E164)
 ![Header](https://img.shields.io/badge/Pytest-090909?style=for-the-badge&logo=pytest&logoColor=8cc4d7)
+
+### Тестовая документация
+- [Чек-листы]()
+- [Тест-кейсы]()
+- [Баг-репорты]()
+- [SQL запросы]()
+- [Коллекции Postman]()
+- [Автотесты на Python]()
+
+### Контакты
+[![Header](https://img.shields.io/badge/Telegram-090909?style=for-the-badge&logo=telegram&logoColor=31a5db)](https://t.me/solution_found)
+
