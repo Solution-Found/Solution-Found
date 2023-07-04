@@ -38,7 +38,7 @@
 - [Баг-репорты]()
 - [SQL запросы]()
 - [Коллекции Postman]()
-- Автотесты на Python: [1 проект](https://github.com/Solution-Found/yandex_api_stand_tests) [2 проект]() 
+- [Автотесты на Python](https://github.com/Solution-Found/Solution-Found/tree/main/projects)
 
 ### Контакты
 [![Header](https://img.shields.io/badge/Telegram-090909?style=for-the-badge&logo=telegram&logoColor=31a5db)](https://t.me/solution_found)
