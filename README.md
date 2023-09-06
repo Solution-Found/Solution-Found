@@ -1,11 +1,8 @@
-![Header](https://github.com/Solution-Found/Solution-Found/blob/main/assets/logo.png)
+![Header](https://github.com/Solution-Found/Solution-Found/tree/master/assets/banner.png)
 
-## Я начинающий QA Engineer
+## Начинающий QA Engineer
 
-## Моё резюме
-[Ссылка на резюме]()
-
-### Основные инструменты и технологии
+### Используемые инструменты и технологии
 
 ![Header](https://img.shields.io/badge/Яндекс_Трекер-090909?style=for-the-badge&logo=yandex&logoColor=136be1)
 ![Header](https://img.shields.io/badge/YouTrack-090909?style=for-the-badge&logo=youtrack&logoColor=f76935)
@@ -32,13 +29,17 @@
 ![Header](https://img.shields.io/badge/PyCharm-090909?style=for-the-badge&logo=pycharm&logoColor=92E164)
 ![Header](https://img.shields.io/badge/Pytest-090909?style=for-the-badge&logo=pytest&logoColor=8cc4d7)
 
-### Тестовая документация
+### Артефакты и примеры тестовой документации
+- [Сертификат]()
 - [Чек-листы]()
 - [Тест-кейсы]()
 - [Баг-репорты]()
-- [SQL запросы]()
+- [Тест-анализ]()
+- [Тест-дизайн]()
+- [Рекомендации по UX-тестированию]()
 - [Коллекции Postman]()
-- [Автотесты на Python](https://github.com/Solution-Found/Solution-Found/tree/main/projects)
+- [SQL запросы]()
+- [Автотесты API на Python](https://github.com/Solution-Found/Solution-Found/tree/master/autotests)
 
 ### Контакты
 [![Header](https://img.shields.io/badge/Telegram-090909?style=for-the-badge&logo=telegram&logoColor=31a5db)](https://t.me/solution_found)
