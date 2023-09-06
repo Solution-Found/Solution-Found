@@ -1,0 +1,2 @@
+### Примеры чек-листов
+- [Посмотреть](https://github.com/Solution-Found/Solution-Found/tree/master/checklists/assets/checklist-interface-1.png) <- тестирование вёрстки учебного веб-приложения "Яндекс Самокат" - проверка поля ввода "Станция метро"
