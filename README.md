@@ -1,4 +1,4 @@
-![Header](https://github.com/Solution-Found/Solution-Found/tree/master/assets/banner.png)
+![Banner](https://github.com/Solution-Found/Solution-Found/tree/master/assets/banner.png)
 
 ## Начинающий QA Engineer
 
