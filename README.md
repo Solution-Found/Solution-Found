@@ -1,4 +1,4 @@
-![Header](https://github.com/Solution-Found/Solution-Found/tree/master/assets/logo.png)
+![Header](https://github.com/Solution-Found/Solution-Found/tree/master/assets/banner.png)
 
 ## Начинающий QA Engineer
 
