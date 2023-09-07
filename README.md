@@ -33,7 +33,7 @@
 - [Сертификаты](https://github.com/Solution-Found/Solution-Found/tree/master/credentials/)
 - [Чек-листы](https://github.com/Solution-Found/Solution-Found/tree/master/checklists/)
 - [Тест-кейсы](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/)
-- [Баг-репорты]()
+- [Баг-репорты](https://github.com/Solution-Found/Solution-Found/tree/master/reports/)
 - [Тест-анализ]()
 - [Тест-дизайн]()
 - [Рекомендации по UX-тестированию]()
