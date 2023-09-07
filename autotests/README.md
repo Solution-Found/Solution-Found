@@ -1,3 +1,2 @@
-### Проекты с автотестами
-- [1 проект тестирования API Яндекс.Прилавок](https://github.com/Solution-Found/yandex_api_stand_tests)
-- []()
+## Проекты с автотестами
+- [Посмотреть](https://github.com/Solution-Found/Yandex-Prilavok-Stand-Tests) <- **тестирование API учебного приложения "Яндекс Прилавок"** -> Python-автотесты с проверками эндпоинта API "Создание пользователя" - КЭ и ГЗ параметра "firstName"
