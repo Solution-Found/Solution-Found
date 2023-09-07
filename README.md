@@ -37,7 +37,7 @@
 - [Тест-анализ](https://github.com/Solution-Found/Solution-Found/tree/master/analysis/)
 - [Тест-дизайн](https://github.com/Solution-Found/Solution-Found/tree/master/design/)
 - [API](https://github.com/Solution-Found/Solution-Found/tree/master/api/)
-- [SQL]()
+- [SQL](https://github.com/Solution-Found/Solution-Found/tree/master/sql/)
 - [Автотесты API на Python](https://github.com/Solution-Found/Solution-Found/tree/master/autotests)
 - [Рекомендации по результатам UX-тестирования](https://github.com/Solution-Found/Solution-Found/tree/master/recommendations/)
 
