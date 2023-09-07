@@ -1,2 +1,3 @@
 ### Примеры тест-кейсов
 - [Посмотреть](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/assets/testcase-1.png) <- **тестирование функционала учебного приложения "Яндекс Маршруты"** -> проверка отправки на сервер введённых данных в форму "Добавление прав"
+- [Посмотреть](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/assets/testcase-2.png) <- **тестирование функционала мобильной версии коммерческого веб-сервиса "SmallTalk"** -> проверка экрана "Ответить на вопросы, используя изучаемые слова"
