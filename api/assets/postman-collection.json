@@ -1,0 +1,3292 @@
+{
+	"info": {
+		"_postman_id": "f32d2767-de68-42c5-96ad-2b45dad71f89",
+		"name": "Тесты части функциональности API Яндекс.Прилавок",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25973528"
+	},
+	"item": [
+		{
+			"name": "Эндпоинт \"Доставка \"Привезём быстро\"\"",
+			"item": [
+				{
+					"name": "Позитивные тесты",
+					"item": [
+						{
+							"name": "Корректный запрос",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonObject = xml2Json(responseBody);\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"name\", function () {\r",
+											"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+											"});\r",
+											"pm.test(\"isItPossibleToDeliver\", function () {\r",
+											"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+											"});\r",
+											"pm.test(\"hostDeliveryCost\", function () {\r",
+											"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"23\");\r",
+											"});\r",
+											"pm.test(\"clientDeliveryCost\", function () {\r",
+											"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+											"});\r",
+											"pm.test(\"min\", function () {\r",
+											"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+											"});\r",
+											"pm.test(\"max\", function () {\r",
+											"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"fast-delivery",
+										"v3.1.1",
+										"calculate-delivery.xml"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "КЭ и ГЗ \"Количество продуктов в заказе\"",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Стоимость внутренней доставки = 23",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsCount\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"23\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>{{productsCount_hostDeliveryCost_23}}</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Стоимость внутренней доставки = 43",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsCount\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"43\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>{{productsCount_hostDeliveryCost_43}}</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Стоимость доставки клиенту = 99",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsCount\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"43\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"99\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>{{productsCount_clientDeliveryCost_99}}</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Негативные тесты",
+							"item": [
+								{
+									"name": "Перебор значений параметра \"productsCount\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>{{productsCount_negative}}</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Параметр \"productsCount\" не передан",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Пропущенные тесты",
+							"item": [
+								{
+									"name": "Параметр \"productsCount\" равен 0",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>0</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "КЭ и ГЗ \"Вес продуктов\"",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Стоимость внутренней доставки = 23",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsWeight\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"23\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>{{productsWeight_hostDeliveryCost_23}}</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Стоимость внутренней доставки = 43",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsWeight\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"43\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>{{productsWeight_hostDeliveryCost_43}}</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Стоимость доставки клиенту = 99",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsWeight\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"43\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"99\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>{{productsWeight_clientDeliveryCost_99}}</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Негативные тесты",
+							"item": [
+								{
+									"name": "Перебор значений параметра \"productsWeight\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>{{productsWeight_negative}}</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Параметр \"productsWeight\" не передан",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Пропущенные тесты",
+							"item": [
+								{
+									"name": "Параметр \"productsWeight\" равен 0",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>0</productsWeight>\r\n    <deliveryTime>10</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "КЭ и ГЗ \"Планируемое время доставки\"",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Доставка возможна",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"deliveryTime\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"name\", function () {\r",
+															"    pm.expect(jsonObject.response.$.name).to.eql(\"Привезём быстро\");\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"true\");\r",
+															"});\r",
+															"pm.test(\"hostDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.hostDeliveryCost).to.eql(\"23\");\r",
+															"});\r",
+															"pm.test(\"clientDeliveryCost\", function () {\r",
+															"    pm.expect(jsonObject.response.$.clientDeliveryCost).to.eql(\"0\");\r",
+															"});\r",
+															"pm.test(\"min\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.min).to.eql(\"25\");\r",
+															"});\r",
+															"pm.test(\"max\", function () {\r",
+															"    pm.expect(jsonObject.response.toBeDeliveredTime.max).to.eql(\"30\");\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>{{deliveryTime_available}}</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Доставки нет",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"deliveryTime\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"var jsonObject = xml2Json(responseBody);\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"isItPossibleToDeliver\", function () {\r",
+															"    pm.expect(jsonObject.response.$.isItPossibleToDeliver).to.eql(\"false\");"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>{{deliveryTime_not_available}}</deliveryTime>\r\n</InputModel>",
+													"options": {
+														"raw": {
+															"language": "xml"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"fast-delivery",
+														"v3.1.1",
+														"calculate-delivery.xml"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Негативные тесты",
+							"item": [
+								{
+									"name": "Перебор значений параметра \"deliveryTime\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n    <deliveryTime>{{deliveryTime_negative}}</deliveryTime>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Параметр \"deliveryTime\" не передан",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "<InputModel>\r\n    <productsCount>5</productsCount>\r\n    <productsWeight>1</productsWeight>\r\n</InputModel>",
+											"options": {
+												"raw": {
+													"language": "xml"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"fast-delivery",
+												"v3.1.1",
+												"calculate-delivery.xml"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Прочие негативные тесты",
+					"item": [
+						{
+							"name": "Пустой запрос",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/fast-delivery/v3.1.1/calculate-delivery.xml",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"fast-delivery",
+										"v3.1.1",
+										"calculate-delivery.xml"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Эндпоинт \"Получение продуктов в корзине\"",
+			"item": [
+				{
+					"name": "Предусловия",
+					"item": [
+						{
+							"name": "Корзина не создана",
+							"item": [
+								{
+									"name": "Позитивные тесты",
+									"item": [
+										{
+											"name": "Получение продуктов корзины",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {\r",
+															"    pm.response.to.have.status(404);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_nonexist_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_nonexist_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Просмотр в БД существующих корзин",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"const parseCSV = (csvString) => {\r",
+													"    const rows = csvString.split(\"\\n\");\r",
+													"    const headers = rows[0].split(\",\");\r",
+													"\r",
+													"    return rows.slice(1).map(row => {\r",
+													"        const rowData = row.split(\",\");\r",
+													"        const rowObject = {};\r",
+													"        headers.forEach((header, index) => {\r",
+													"            rowObject[header.trim()] = rowData[index] ? rowData[index].trim() : \"\";\r",
+													"        });\r",
+													"        return rowObject;\r",
+													"    });\r",
+													"};\r",
+													"\r",
+													"const findNextAvailableId = (data) => {\r",
+													"    let id = 1;\r",
+													"    while (data.some(row => row.id == id)) {\r",
+													"        id++;\r",
+													"    }\r",
+													"    return id;\r",
+													"};\r",
+													"\r",
+													"const respBody = pm.response.text();\r",
+													"const parsedData = parseCSV(respBody);\r",
+													"const nextAvailableId = findNextAvailableId(parsedData);\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_nonexist_cart\", nextAvailableId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{server}}/api/db/resources/order_model.csv",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"db",
+												"resources",
+												"order_model.csv"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Корзина создана",
+							"item": [
+								{
+									"name": "Позитивные тесты",
+									"item": [
+										{
+											"name": "Получение продуктов корзины",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Предварительное создание корзины",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"let jsonResponse = pm.response.json();\r",
+													"let valueToStore = jsonResponse.id;\r",
+													"\r",
+													"pm.collectionVariables.set('id_new_cart', valueToStore);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/orders",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Зарегистрирован пользователь",
+							"item": [
+								{
+									"name": "Выполнено создание корзины",
+									"item": [
+										{
+											"name": "Позитивные тесты",
+											"item": [
+												{
+													"name": "Получение продуктов корзины",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"Status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": [
+																{
+																	"key": "token",
+																	"value": "{{token}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{server}}/api/v1/orders/{{id_user_new_cart}}",
+															"host": [
+																"{{server}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"orders",
+																"{{id_user_new_cart}}"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Негативные тесты",
+											"item": [
+												{
+													"name": "Получение продуктов корзины (Не передан токен авторизации)",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"Status code is 401\", function () {\r",
+																	"    pm.response.to.have.status(401);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{server}}/api/v1/orders/{{id_user_new_cart}}",
+															"host": [
+																"{{server}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"orders",
+																"{{id_user_new_cart}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Получение продуктов корзины (Передан некорректный токен авторизации)",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"Status code is 401\", function () {\r",
+																	"    pm.response.to.have.status(401);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": [
+																{
+																	"key": "token",
+																	"value": "123456789-abcdef",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{server}}/api/v1/orders/{{id_user_new_cart}}",
+															"host": [
+																"{{server}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"orders",
+																"{{id_user_new_cart}}"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Предварительное создание корзины пользователем",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"let jsonResponse = pm.response.json();\r",
+															"let valueToStore = jsonResponse.id;\r",
+															"\r",
+															"pm.collectionVariables.set('id_user_new_cart', valueToStore);"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Предварительная регистрация пользователя",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Token\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"authToken\");\r",
+													"});\r",
+													"\r",
+													"let jsonResponse = pm.response.json();\r",
+													"let valueToStore = jsonResponse.authToken;\r",
+													"\r",
+													"pm.collectionVariables.set('token', valueToStore);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"firstName\": \"Яна\",\r\n    \"phone\": \"+74954371854\",\r\n    \"address\": \"г. Москва, ул. Пушкина, д. 10\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/users",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"users"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Пропущенные тесты",
+					"item": [
+						{
+							"name": "Получение продуктов корзины (С телом в запросе)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"{{id_new_cart}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Эндпоинт \"Добавление товаров в корзину\"",
+			"item": [
+				{
+					"name": "Без предусловия (Корзина не создана)",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Добавление продуктов в корзину с проверкой БД",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_nonexist_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_nonexist_cart}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Просмотр в БД существующих корзин",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const parseCSV = (csvString) => {\r",
+											"    const rows = csvString.split(\"\\n\");\r",
+											"    const headers = rows[0].split(\",\");\r",
+											"\r",
+											"    return rows.slice(1).map(row => {\r",
+											"        const rowData = row.split(\",\");\r",
+											"        const rowObject = {};\r",
+											"        headers.forEach((header, index) => {\r",
+											"            rowObject[header.trim()] = rowData[index] ? rowData[index].trim() : \"\";\r",
+											"        });\r",
+											"        return rowObject;\r",
+											"    });\r",
+											"};\r",
+											"\r",
+											"const findNextAvailableId = (data) => {\r",
+											"    let id = 1;\r",
+											"    while (data.some(row => row.id == id)) {\r",
+											"        id++;\r",
+											"    }\r",
+											"    return id;\r",
+											"};\r",
+											"\r",
+											"const respBody = pm.response.text();\r",
+											"const parsedData = parseCSV(respBody);\r",
+											"const nextAvailableId = findNextAvailableId(parsedData);\r",
+											"\r",
+											"pm.collectionVariables.set(\"id_nonexist_cart\", nextAvailableId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/db/resources/order_model.csv",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"db",
+										"resources",
+										"order_model.csv"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "С предусловием (Корзина создана)",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Добавление продуктов в корзину с проверкой БД",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_new_cart}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Добавление продуктов в корзину (склад не может выполнить заказ) с проверкой БД",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 409\", function () {\r",
+													"    pm.response.to.have.status(409);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Нет склада, способного обработать Ваш заказ\");\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 10,\r\n            \"quantity\": 50\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_new_cart}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "КЭ и ГЗ \"Список продуктов\"",
+							"item": [
+								{
+									"name": "Негативные тесты",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"productsList\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": {{productsList_negative}}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Пропущенные тесты",
+									"item": [
+										{
+											"name": "Параметр \"productsList\" со значением типа строка",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": \"123\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "КЭ и ГЗ \"id продукта\"",
+							"item": [
+								{
+									"name": "Негативные тесты",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"id\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": {{id_negative}},\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Параметр \"id\" не передан",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "КЭ и ГЗ \"Количество продуктов\"",
+							"item": [
+								{
+									"name": "Негативные тесты",
+									"item": [
+										{
+											"name": "Перебор значений параметра \"quantity\"",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": {{quantity_negative}}\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Параметр \"quantity\" не передан",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Пропущенные тесты",
+									"item": [
+										{
+											"name": "Параметр \"quantity\" равен 0",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 0\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Параметр \"quantity\" с отрицательным значением",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": -5\r\n        }\r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Прочие негативные тесты",
+							"item": [
+								{
+									"name": "Пустой JSON запрос",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_new_cart}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Предварительное создание корзины",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"let jsonResponse = pm.response.json();\r",
+											"let valueToStore = jsonResponse.id;\r",
+											"\r",
+											"pm.collectionVariables.set('id_new_cart', valueToStore);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/orders",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Эндпоинт \"Удаление корзины\"",
+			"item": [
+				{
+					"name": "Предусловие (Корзина создана)",
+					"item": [
+						{
+							"name": "Позитивные тесты",
+							"item": [
+								{
+									"name": "Удаление корзины",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_new_cart}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Пропущенные тесты",
+							"item": [
+								{
+									"name": "Предусловие (Корзина удалена)",
+									"item": [
+										{
+											"name": "Повторное создание новой корзины с таким же \"id\" как у удалённой",
+											"item": [
+												{
+													"name": "Создание корзины",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"Status code is 201\", function () {\r",
+																	"    pm.response.to.have.status(201);\r",
+																	"});\r",
+																	"\r",
+																	"let jsonResponse = pm.response.json();\r",
+																	"let valueToStore = jsonResponse.id;\r",
+																	"\r",
+																	"pm.collectionVariables.set('id_new_cart', valueToStore);"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 2,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{server}}/api/v1/orders",
+															"host": [
+																"{{server}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"orders"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Повторная попытка удаления уже удалённой корзины",
+											"item": [
+												{
+													"name": "Удаление корзины",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"pm.sendRequest({\r",
+																	"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+																	"    method: 'GET'\r",
+																	"}, (error, response) => {\r",
+																	"    if (error) {\r",
+																	"        console.error(error);\r",
+																	"    } else {\r",
+																	"        pm.collectionVariables.set('dbBefore', response.text());\r",
+																	"    }\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"exec": [
+																	"pm.test(\"Status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"});\r",
+																	"\r",
+																	"pm.sendRequest({\r",
+																	"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+																	"    method: 'GET'\r",
+																	"}, (error, response) => {\r",
+																	"    if (error) {\r",
+																	"        console.error(error);\r",
+																	"    } else {\r",
+																	"        const dbAfter = response.text();\r",
+																	"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+																	"\r",
+																	"        if (dbBefore !== dbAfter) {\r",
+																	"            console.log('Обнаружены изменения в базе данных:');\r",
+																	"            console.log('До запроса:');\r",
+																	"            console.log(dbBefore);\r",
+																	"            console.log('После запроса:');\r",
+																	"            console.log(dbAfter);\r",
+																	"        } else {\r",
+																	"            console.log('Изменений в базе данных нет');\r",
+																	"        }\r",
+																	"    }\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+															"host": [
+																"{{server}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"orders",
+																"{{id_new_cart}}"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Удаление корзины",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        pm.collectionVariables.set('dbBefore', response.text());\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.sendRequest({\r",
+															"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+															"    method: 'GET'\r",
+															"}, (error, response) => {\r",
+															"    if (error) {\r",
+															"        console.error(error);\r",
+															"    } else {\r",
+															"        const dbAfter = response.text();\r",
+															"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+															"\r",
+															"        if (dbBefore !== dbAfter) {\r",
+															"            console.log('Обнаружены изменения в базе данных:');\r",
+															"            console.log('До запроса:');\r",
+															"            console.log(dbBefore);\r",
+															"            console.log('После запроса:');\r",
+															"            console.log(dbAfter);\r",
+															"        } else {\r",
+															"            console.log('Изменений в базе данных нет');\r",
+															"        }\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{server}}/api/v1/orders/{{id_new_cart}}",
+													"host": [
+														"{{server}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"orders",
+														"{{id_new_cart}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Предварительное создание корзины",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"let jsonResponse = pm.response.json();\r",
+											"let valueToStore = jsonResponse.id;\r",
+											"\r",
+											"pm.collectionVariables.set('id_new_cart', valueToStore);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productsList\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/orders",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Прочие негативные тесты",
+					"item": [
+						{
+							"name": "Удаление несозданной корзины",
+							"item": [
+								{
+									"name": "Удаление несозданной корзины",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        pm.collectionVariables.set('dbBefore', response.text());\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.sendRequest({\r",
+													"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+													"    method: 'GET'\r",
+													"}, (error, response) => {\r",
+													"    if (error) {\r",
+													"        console.error(error);\r",
+													"    } else {\r",
+													"        const dbAfter = response.text();\r",
+													"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+													"\r",
+													"        if (dbBefore !== dbAfter) {\r",
+													"            console.log('Обнаружены изменения в базе данных:');\r",
+													"            console.log('До запроса:');\r",
+													"            console.log(dbBefore);\r",
+													"            console.log('После запроса:');\r",
+													"            console.log(dbAfter);\r",
+													"        } else {\r",
+													"            console.log('Изменений в базе данных нет');\r",
+													"        }\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{server}}/api/v1/orders/{{id_nonexist_cart}}",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"orders",
+												"{{id_nonexist_cart}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Просмотр в БД существующих корзин",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"const parseCSV = (csvString) => {\r",
+													"    const rows = csvString.split(\"\\n\");\r",
+													"    const headers = rows[0].split(\",\");\r",
+													"\r",
+													"    return rows.slice(1).map(row => {\r",
+													"        const rowData = row.split(\",\");\r",
+													"        const rowObject = {};\r",
+													"        headers.forEach((header, index) => {\r",
+													"            rowObject[header.trim()] = rowData[index] ? rowData[index].trim() : \"\";\r",
+													"        });\r",
+													"        return rowObject;\r",
+													"    });\r",
+													"};\r",
+													"\r",
+													"const findNextAvailableId = (data) => {\r",
+													"    let id = 1;\r",
+													"    while (data.some(row => row.id == id)) {\r",
+													"        id++;\r",
+													"    }\r",
+													"    return id;\r",
+													"};\r",
+													"\r",
+													"const respBody = pm.response.text();\r",
+													"const parsedData = parseCSV(respBody);\r",
+													"const nextAvailableId = findNextAvailableId(parsedData);\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_nonexist_cart\", nextAvailableId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{server}}/api/db/resources/order_model.csv",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"db",
+												"resources",
+												"order_model.csv"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Удаление корзины с невалидным значением id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.sendRequest({\r",
+											"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+											"    method: 'GET'\r",
+											"}, (error, response) => {\r",
+											"    if (error) {\r",
+											"        console.error(error);\r",
+											"    } else {\r",
+											"        pm.collectionVariables.set('dbBefore', response.text());\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.sendRequest({\r",
+											"    url: pm.collectionVariables.get('server') + '/api/db/resources/order_model.csv',\r",
+											"    method: 'GET'\r",
+											"}, (error, response) => {\r",
+											"    if (error) {\r",
+											"        console.error(error);\r",
+											"    } else {\r",
+											"        const dbAfter = response.text();\r",
+											"        const dbBefore = pm.collectionVariables.get('dbBefore');\r",
+											"\r",
+											"        if (dbBefore !== dbAfter) {\r",
+											"            console.log('Обнаружены изменения в базе данных:');\r",
+											"            console.log('До запроса:');\r",
+											"            console.log(dbBefore);\r",
+											"            console.log('После запроса:');\r",
+											"            console.log(dbAfter);\r",
+											"        } else {\r",
+											"            console.log('Изменений в базе данных нет');\r",
+											"        }\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/orders/first",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"first"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "id_nonexist_cart",
+			"value": ""
+		},
+		{
+			"key": "id_new_cart",
+			"value": ""
+		},
+		{
+			"key": "id_user_new_cart",
+			"value": ""
+		},
+		{
+			"key": "dbBefore",
+			"value": ""
+		}
+	]
+}

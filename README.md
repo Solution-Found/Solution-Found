@@ -36,10 +36,10 @@
 - [Баг-репорты](https://github.com/Solution-Found/Solution-Found/tree/master/reports/)
 - [Тест-анализ](https://github.com/Solution-Found/Solution-Found/tree/master/analysis/)
 - [Тест-дизайн](https://github.com/Solution-Found/Solution-Found/tree/master/design/)
-- [Рекомендации по результатам UX-тестирования](https://github.com/Solution-Found/Solution-Found/tree/master/recommendations/)
-- [Коллекции Postman]()
-- [SQL запросы]()
+- [API](https://github.com/Solution-Found/Solution-Found/tree/master/api/)
+- [SQL]()
 - [Автотесты API на Python](https://github.com/Solution-Found/Solution-Found/tree/master/autotests)
+- [Рекомендации по результатам UX-тестирования](https://github.com/Solution-Found/Solution-Found/tree/master/recommendations/)
 
 ### Контакты
 [![Contacts](https://img.shields.io/badge/Telegram-090909?style=for-the-badge&logo=telegram&logoColor=31a5db)](https://t.me/solution_found)

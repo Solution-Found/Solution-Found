@@ -1,0 +1,10 @@
+productsCount_hostDeliveryCost_23,productsCount_hostDeliveryCost_43,productsCount_clientDeliveryCost_99,productsCount_negative,productsWeight_hostDeliveryCost_23,productsWeight_hostDeliveryCost_43,productsWeight_clientDeliveryCost_99,productsWeight_negative,deliveryTime_available,deliveryTime_not_available,deliveryTime_negative,productsList_negative,id_negative,quantity_negative
+1,10,30,,0.1,4.7,10,,7,4,35,[],0,""""""
+6,8,15,Десять,2.4,2.6,6.1,Десять,8,1,24,[{}],"""""",null
+7,9,16,9007199254740992,2.5,2.7,6.2,9007199254740992,20,5,25,,null,9007199254740992
+,13,,-5,,5.9,,-5,21,6,,,1000,10.2
+,14,,10.2,,6,,,,22,Десять,,9007199254740992,"""123"""
+,,,,,,,,,23,9007199254740992,,-5,"""Десять"""
+,,,,,,,,,0,-5,,10.2,
+,,,,,,,,,,10.2,,"""123""",
+,,,,,,,,,,,,"""Десять""",
