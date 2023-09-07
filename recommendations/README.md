@@ -1,0 +1,2 @@
+### Пример рекомендаций заказчику
+- [Посмотреть](https://github.com/Solution-Found/Solution-Found/tree/master/recommendations/assets/ux-recommendations.png) <- **тестирование мобильной версии коммерческого веб-сервиса "SmallTalk"** -> Рекомендации для заказчика по оптимизации веб-сервиса, основанные на результатах UX-тестирования
