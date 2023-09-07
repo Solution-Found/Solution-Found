@@ -1,2 +1,3 @@
 ## Проекты с автотестами
 - [Посмотреть](https://github.com/Solution-Found/Yandex-Prilavok-Stand-Tests) <- **тестирование API учебного приложения "Яндекс Прилавок"** -> Python-автотесты с проверками эндпоинта API "Создание пользователя" - КЭ и ГЗ параметра "firstName"
+- [Посмотреть](https://github.com/Solution-Found/Yandex-Prilavok-Kit-Creation-Tests) <- **тестирование API учебного приложения "Яндекс Прилавок"** -> Python-автотесты с проверками эндпоинта API "Создание набора" - КЭ и ГЗ параметра "name"
