@@ -1,0 +1,2 @@
+### Сертификаты
+- [Посмотреть](https://github.com/Solution-Found/Solution-Found/tree/master/credentials/assets/testing-cert.jpg) <- **Сертификат о прохождении обучения по профессии "Инженер по тестированию plus" в Яндекс Практикуме**

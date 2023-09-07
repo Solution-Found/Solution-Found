@@ -30,7 +30,7 @@
 ![Logo](https://img.shields.io/badge/Pytest-090909?style=for-the-badge&logo=pytest&logoColor=8cc4d7)
 
 ### Артефакты и примеры тестовой документации
-- [Сертификат]()
+- [Сертификаты](https://github.com/Solution-Found/Solution-Found/tree/master/credentials/)
 - [Чек-листы](https://github.com/Solution-Found/Solution-Found/tree/master/checklists/)
 - [Тест-кейсы](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/)
 - [Баг-репорты]()
