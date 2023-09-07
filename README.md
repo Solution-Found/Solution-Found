@@ -32,7 +32,7 @@
 ### Артефакты и примеры тестовой документации
 - [Сертификат]()
 - [Чек-листы](https://github.com/Solution-Found/Solution-Found/tree/master/checklists/)
-- [Тест-кейсы]()
+- [Тест-кейсы](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/)
 - [Баг-репорты]()
 - [Тест-анализ]()
 - [Тест-дизайн]()
