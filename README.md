@@ -35,7 +35,7 @@
 - [Тест-кейсы](https://github.com/Solution-Found/Solution-Found/tree/master/testcases/)
 - [Баг-репорты](https://github.com/Solution-Found/Solution-Found/tree/master/reports/)
 - [Тест-анализ](https://github.com/Solution-Found/Solution-Found/tree/master/analysis/)
-- [Тест-дизайн]()
+- [Тест-дизайн](https://github.com/Solution-Found/Solution-Found/tree/master/design/)
 - [Рекомендации по UX-тестированию]()
 - [Коллекции Postman]()
 - [SQL запросы]()
